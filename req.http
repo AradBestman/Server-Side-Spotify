@@ -1,0 +1,83 @@
+### GET ALL Users:
+GET http://localhost:5001/api/v1/users
+
+
+
+### Create User:
+POST http://localhost:5001/api/v1/users/register
+Content-Type: application/json
+
+{
+   "name": "Arad Ariel",
+  "email": "arad.ariel22@gmail.com",
+  "password": "aA123456!",
+  "gender": "Male",
+  "month": "January",
+  "date": "01",
+  "year": "1990",
+
+}
+ 
+
+### Login:
+POST http://localhost:5001/api/v1/users/login
+Content-Type: application/json
+
+{
+  "email": "arad.ariel22@gmail.com",
+  "password": "aA123456!"
+}
+
+
+
+###Upload
+POST http://localhost:5001/api/v1/upload/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### POST SONG:
+POST http://localhost:5001/api/v1/songs
+Content-Type: application/json
+
+{
+  "name": "Song Name",
+  "artist": "Artist Name",
+  "song": "Song URL",
+  "img": "Image URL",
+  "duration": "Song Duration",
+  "audioFilePath": "Audio File Path"
+}
+
+
