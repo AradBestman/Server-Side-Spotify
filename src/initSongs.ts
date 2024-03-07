@@ -25,6 +25,7 @@ export async function initSongs() {
     // create music for some category
     const israeliMusic = [];
     const TranceMusic = [];
+    const PopMusic = [];
 
     israeliMusic.push(
       new Song({
@@ -44,14 +45,24 @@ export async function initSongs() {
         userId: adminUser._id,
       })
     );
+    PopMusic.push(
+      new Song({
+        originalname: `Lana Del Rey - Young & Beauriful (Single) - 01 - Young And Beautiful`,
+        destination: "public/uploads/songs/",
+        path: `public/uploads/songs/Lana Del Rey - Young & Beauriful (Single) - 01 - Young And Beautiful.mp3`,
+        size: 11111,
+        userId: adminUser._id,
+      })
+    );
 
     // save all the songs and get an id array of new music
     const created_israeli = await Song.bulkSave(israeliMusic);
     const created_trance = await Song.bulkSave(TranceMusic);
+    const created_pop = await Song.bulkSave(PopMusic);
 
     // create a category for the created music,
     // the category has a relationship with those songs
-    const category = await Category.create({
+    const categoryIsraeli = await Category.create({
       name: "israeliMusic",
       tagline: "..",
       songs: Object.values(created_israeli.insertedIds),
@@ -62,19 +73,28 @@ export async function initSongs() {
       songs: Object.values(created_trance.insertedIds),
     });
 
+    const categoryPop = await Category.create({
+      name: "PopMusic",
+      tagline: "..",
+      songs: Object.values(created_pop.insertedIds),
+    });
+
     // create a playlist with relationship to songs
     const playlistImage =
       "https://images.unsplash.com/photo-1682695797221-8164ff1fafc9?q=80&w=3570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
     const playlistImage2 =
       "https://as1.ftcdn.net/v2/jpg/05/52/46/10/1000_F_552461055_DKlQAqxsTfohmMZC3Suz0xKzD8GMuuAy.jpg";
+
+    const playlistImage3 =
+      "https://images.unsplash.com/photo-1593532847221-003b37578812?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
     const playlist = await Playlist.create({
-      name: "My Playlist",
+      name: "IsraeliMusic",
       desc: "My favorite songs",
       img: playlistImage,
       songs: Object.values(created_israeli.insertedIds),
       userId: adminUser._id,
-      category_id: category._id,
+      category_id: categoryIsraeli._id,
     });
     const playlist2 = await Playlist.create({
       name: "My TranceInitPlaylist",
@@ -83,6 +103,14 @@ export async function initSongs() {
       songs: Object.values(created_trance.insertedIds),
       userId: adminUser._id,
       category_id: categoryTrance._id,
+    });
+    const playlist3 = await Playlist.create({
+      name: "My PopPlaylist",
+      desc: "My Pop songs",
+      img: playlistImage3,
+      songs: Object.values(created_pop.insertedIds),
+      userId: adminUser._id,
+      category_id: categoryPop._id,
     });
 
     // Add playlist to user's playlist array
@@ -93,6 +121,8 @@ export async function initSongs() {
   // when fetching a category
   // populate it with the song array
   // orelse it comes without the actual songs inside
-  const category = await Category.findOne({ name: "heart" }).populate("songs");
+  const category = await Category.findOne({ name: "israeli" }).populate(
+    "songs"
+  );
   console.log(category);
 }

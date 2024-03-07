@@ -123,8 +123,9 @@ router.get("/", isAdmin, async (req, res, next) => {
 router.delete("/:id", isAdmin, async (req, res, next) => {
   try {
     const { id } = req.params;
-    await User.findByIdAndDelete(id);
+    const deletedUser = await User.findByIdAndDelete(id);
     Logger.verbose("Delete Successfully");
+    res.status(200).json(deletedUser);
   } catch (error) {
     next(error);
   }
