@@ -64,7 +64,7 @@ router.patch("/:id", validateToken, async (req, res) => {
   }
 });
 
-//get all playlists from database
+//Get All Playlists From The Database///
 router.get("/", validateToken, async (req, res) => {
   try {
     // Extract query parameters from the request

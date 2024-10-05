@@ -1,3 +1,4 @@
+import { ISong } from "./song.d";
 type IUser = {
   name: string;
   email: string;
@@ -6,7 +7,7 @@ type IUser = {
   month: string;
   date: string;
   year: string;
-  likedSongs?: string[];
+  likedSongs?: ISong[];
   playlists: [IPlaylist];
   isAdmin?: boolean;
   _id?: string;

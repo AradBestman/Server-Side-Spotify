@@ -2,7 +2,10 @@ import { Category } from "./database/models/category-model";
 import { Song } from "./database/models/song-model";
 import { User } from "./database/models/user-model";
 import { Playlist } from "./database/models/playlist-model"; // Import Playlist model
+//This is the Init Of The DataBase !!!///
 
+const calculateSongDuration = (size, bitrate) =>
+  ((size * 8) / (bitrate * 1000 * 60)).toFixed(2);
 export async function initSongs() {
   const user = await User.findOne({ email: "Arad.ariel22@test.com" });
 
@@ -26,14 +29,16 @@ export async function initSongs() {
     const israeliMusic = [];
     const TranceMusic = [];
     const PopMusic = [];
-
+    const bitrate = 320;
     israeliMusic.push(
       new Song({
         originalname: `מוקי - ילד של אבא.mp3`,
         destination: "public/uploads/songs/",
         path: `public/uploads/songs/מוקי - ילד של אבא.mp3`,
-        size: 83063462,
+        size: 9808222,
         userId: adminUser._id,
+        bitrate,
+        duration: calculateSongDuration(9808222, bitrate),
       })
     );
     TranceMusic.push(
@@ -41,8 +46,10 @@ export async function initSongs() {
         originalname: `09 Digital Sun - Virtual Journey.mp3`,
         destination: "public/uploads/songs/",
         path: `public/uploads/songs/09 Digital Sun - Virtual Journey.mp3`,
-        size: 11111,
+        size: 23372926,
         userId: adminUser._id,
+        bitrate,
+        duration: calculateSongDuration(23372926, bitrate),
       })
     );
     PopMusic.push(
@@ -50,8 +57,10 @@ export async function initSongs() {
         originalname: `Lana Del Rey - Young & Beauriful (Single) - 01 - Young And Beautiful`,
         destination: "public/uploads/songs/",
         path: `public/uploads/songs/Lana Del Rey - Young & Beauriful (Single) - 01 - Young And Beautiful.mp3`,
-        size: 11111,
+        size: 9449572,
         userId: adminUser._id,
+        bitrate,
+        duration: calculateSongDuration(9449572, bitrate),
       })
     );
 

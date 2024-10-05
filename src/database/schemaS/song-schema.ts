@@ -10,6 +10,8 @@ const songSchema = new Schema<ISong>({
   path: { type: String, required: true },
   size: { type: Number, required: true },
   userId: { type: String, required: true },
+  bitrate: { type: Number, required: true },
+  duration: { type: Number, required: true },
 });
 
 export default songSchema;
